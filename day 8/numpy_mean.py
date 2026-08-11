@@ -1,0 +1,11 @@
+import numpy as np
+marks=np.array([[60,70,80],[50,20,30],[89,56,23]])
+print(marks)
+print(np.mean(marks))
+print("shape:",marks.shape)
+result=np.mean(marks,axis=1)
+print(result)
+print("result:",result.shape)
+result1=np.mean(marks,axis=0)
+print(result1)
+print("result:",result1.shape)
