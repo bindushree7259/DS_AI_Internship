@@ -203,3 +203,4 @@ print("SUCCESS")
 print("=" * 60)
 
 print("Cleaned dataset saved successfully!")
+print(df.describe())

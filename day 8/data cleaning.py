@@ -74,7 +74,6 @@ print(df.duplicated().sum())
 
 # Remove duplicates
 df = df.drop_duplicates()
-
 print("\nShape after removing duplicates:", df.shape)
 
 # FINAL CLEAN DATASET
