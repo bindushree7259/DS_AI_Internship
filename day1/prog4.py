@@ -1,8 +1,5 @@
-# Check if a string is a palindrome
-
-text = input("Enter a string: ")
-
-if text == text[::-1]:
-    print("Palindrome")
+text=input("enter a string:")
+if text==text[::-1]:
+    print("palindrome")
 else:
-    print("Not a palindrome")
+    print("not a palindrome")
