@@ -1,51 +1,28 @@
-# ============================================================
-# COMPLETE EDA PROJECT
-# Dataset: Student Performance
-# ============================================================
-
-# -----------------------------
-# 1. IMPORT LIBRARIES
-# -----------------------------
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Set plotting style
 sns.set_theme(style="whitegrid")
 
-
-# -----------------------------
-# 2. CREATE DATASET
-# -----------------------------
+# ============================================================
+# 1. CREATE DATASET
+# ============================================================
 
 data = {
     "Student_ID": [101,102,103,104,105,106,107,108,109,110,111,112,113,114,115],
 
-    "Age": [
-        18,19,18,20,19,18,21,20,19,18,22,20,19,21,18
-    ],
+    "Age": [18,19,18,20,19,18,21,20,19,18,22,20,19,21,18],
 
-    "Study_Hours": [
-        2,4,3,6,5,2,8,7,4,3,9,6,5,8,2
-    ],
+    "Study_Hours": [2,4,3,6,5,2,8,7,4,3,9,6,5,8,2],
 
-    "Attendance": [
-        75,85,80,92,88,70,95,90,82,78,97,91,86,94,68
-    ],
+    "Attendance": [75,85,80,92,88,70,95,90,82,78,97,91,86,94,68],
 
-    "Maths": [
-        65,78,72,90,85,55,95,88,76,68,98,91,84,93,50
-    ],
+    "Maths": [65,78,72,90,85,55,95,88,76,68,98,91,84,93,50],
 
-    "Science": [
-        70,80,75,92,87,60,96,90,78,72,99,89,85,95,55
-    ],
+    "Science": [70,80,75,92,87,60,96,90,78,72,99,89,85,95,55],
 
-    "English": [
-        68,82,74,88,90,62,94,86,80,75,96,92,87,91,58
-    ],
+    "English": [68,82,74,88,90,62,94,86,80,75,96,92,87,91,58],
 
     "Gender": [
         "Female","Male","Female","Male","Female",
@@ -60,119 +37,65 @@ data = {
     ]
 }
 
+# CREATE DATAFRAME
 df = pd.DataFrame(data)
 
+print("=" * 70)
+print("COMPLETE EDA - STUDENT PERFORMANCE DATASET")
+print("=" * 70)
 
-# ============================================================
-# 3. BASIC DATA UNDERSTANDING
-# ============================================================
-
-print("=" * 60)
-print("DATASET")
-print("=" * 60)
-
+print("\nDATASET:")
 print(df)
 
 
-print("\n" + "=" * 60)
-print("FIRST 5 ROWS")
-print("=" * 60)
+# ============================================================
+# 2. BASIC INFORMATION
+# ============================================================
 
-print(df.head())
-
-
-print("\n" + "=" * 60)
-print("LAST 5 ROWS")
-print("=" * 60)
-
-print(df.tail())
-
-
-print("\n" + "=" * 60)
-print("DATASET SHAPE")
-print("=" * 60)
+print("\n" + "=" * 70)
+print("DATASET INFORMATION")
+print("=" * 70)
 
 print("Rows:", df.shape[0])
 print("Columns:", df.shape[1])
 
-
-print("\n" + "=" * 60)
-print("COLUMN NAMES")
-print("=" * 60)
-
+print("\nColumn Names:")
 print(df.columns.tolist())
 
-
-print("\n" + "=" * 60)
-print("DATA TYPES")
-print("=" * 60)
-
+print("\nData Types:")
 print(df.dtypes)
 
-
-print("\n" + "=" * 60)
-print("DATASET INFORMATION")
-print("=" * 60)
-
-df.info()
-
-
-# ============================================================
-# 4. STATISTICAL SUMMARY
-# ============================================================
-
-print("\n" + "=" * 60)
-print("STATISTICAL SUMMARY")
-print("=" * 60)
-
+print("\nStatistical Summary:")
 print(df.describe())
 
 
 # ============================================================
-# 5. MISSING VALUE ANALYSIS
+# 3. MISSING VALUES
 # ============================================================
 
-print("\n" + "=" * 60)
-print("MISSING VALUES")
-print("=" * 60)
+print("\n" + "=" * 70)
+print("MISSING VALUE ANALYSIS")
+print("=" * 70)
 
-missing_values = df.isnull().sum()
+print(df.isnull().sum())
 
-print(missing_values)
-
-
-print("\nTotal missing values:",
+print("\nTotal Missing Values:",
       df.isnull().sum().sum())
 
 
-# Visualization of missing values
-
-plt.figure(figsize=(8, 4))
-
-sns.heatmap(
-    df.isnull(),
-    cbar=False
-)
-
-plt.title("Missing Value Heatmap")
-plt.show()
-
-
 # ============================================================
-# 6. DUPLICATE VALUE ANALYSIS
+# 4. DUPLICATES
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("DUPLICATE ANALYSIS")
-print("=" * 60)
+print("=" * 70)
 
-duplicates = df.duplicated().sum()
-
-print("Number of duplicate rows:", duplicates)
+print("Duplicate Rows:", df.duplicated().sum())
 
 
 # ============================================================
-# 7. IDENTIFY NUMERICAL AND CATEGORICAL COLUMNS
+# 5. DEFINE COLUMNS
 # ============================================================
 
 numeric_cols = [
@@ -190,42 +113,24 @@ categorical_cols = [
 ]
 
 
-print("\n" + "=" * 60)
-print("NUMERICAL COLUMNS")
-print("=" * 60)
-
-print(numeric_cols)
-
-
-print("\n" + "=" * 60)
-print("CATEGORICAL COLUMNS")
-print("=" * 60)
-
-print(categorical_cols)
-
-
 # ============================================================
-# 8. UNIVARIATE ANALYSIS
+# 6. UNIVARIATE ANALYSIS
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("UNIVARIATE ANALYSIS")
-print("=" * 60)
-
-
-# Numerical distributions
+print("=" * 70)
 
 for col in numeric_cols:
 
-    print("\nAnalyzing:", col)
-
+    print("\n", col)
     print(df[col].describe())
 
+    # Histogram
     plt.figure(figsize=(7, 5))
 
     sns.histplot(
-        data=df,
-        x=col,
+        df[col],
         kde=True
     )
 
@@ -235,18 +140,7 @@ for col in numeric_cols:
 
     plt.show()
 
-
-# ============================================================
-# 9. BOX PLOT ANALYSIS
-# ============================================================
-
-print("\n" + "=" * 60)
-print("BOXPLOT ANALYSIS")
-print("=" * 60)
-
-
-for col in numeric_cols:
-
+    # Boxplot
     plt.figure(figsize=(7, 4))
 
     sns.boxplot(
@@ -254,26 +148,23 @@ for col in numeric_cols:
     )
 
     plt.title("Boxplot of " + col)
-    plt.xlabel(col)
 
     plt.show()
 
 
 # ============================================================
-# 10. CATEGORICAL FREQUENCY ANALYSIS
+# 7. CATEGORICAL ANALYSIS
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("CATEGORICAL ANALYSIS")
-print("=" * 60)
-
+print("=" * 70)
 
 for col in categorical_cols:
 
     print("\nFrequency of", col)
 
     print(df[col].value_counts())
-
 
     plt.figure(figsize=(7, 5))
 
@@ -283,28 +174,21 @@ for col in categorical_cols:
     )
 
     plt.title("Distribution of " + col)
-    plt.xlabel(col)
-    plt.ylabel("Count")
 
     plt.show()
 
 
 # ============================================================
-# 11. SKEWNESS ANALYSIS
+# 8. SKEWNESS ANALYSIS
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("SKEWNESS ANALYSIS")
-print("=" * 60)
+print("=" * 70)
 
 skewness = df[numeric_cols].skew()
 
 print(skewness)
-
-
-# Interpretation
-
-print("\nSkewness Interpretation:")
 
 for col in numeric_cols:
 
@@ -329,7 +213,7 @@ for col in numeric_cols:
 
 
 # ============================================================
-# 12. CREATE AVERAGE MARKS
+# 9. CREATE AVERAGE MARKS
 # ============================================================
 
 df["Average_Marks"] = (
@@ -338,10 +222,9 @@ df["Average_Marks"] = (
     df["English"]
 ) / 3
 
-
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("AVERAGE MARKS")
-print("=" * 60)
+print("=" * 70)
 
 print(
     df[
@@ -357,17 +240,15 @@ print(
 
 
 # ============================================================
-# 13. BIVARIATE ANALYSIS
+# 10. BIVARIATE ANALYSIS
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("BIVARIATE ANALYSIS")
-print("=" * 60)
+print("=" * 70)
 
 
-# --------------------------------
 # Study Hours vs Maths
-# --------------------------------
 
 plt.figure(figsize=(7, 5))
 
@@ -378,15 +259,11 @@ sns.scatterplot(
 )
 
 plt.title("Study Hours vs Maths Marks")
-plt.xlabel("Study Hours")
-plt.ylabel("Maths Marks")
 
 plt.show()
 
 
-# --------------------------------
 # Study Hours vs Average Marks
-# --------------------------------
 
 plt.figure(figsize=(7, 5))
 
@@ -397,15 +274,11 @@ sns.scatterplot(
 )
 
 plt.title("Study Hours vs Average Marks")
-plt.xlabel("Study Hours")
-plt.ylabel("Average Marks")
 
 plt.show()
 
 
-# --------------------------------
 # Attendance vs Average Marks
-# --------------------------------
 
 plt.figure(figsize=(7, 5))
 
@@ -416,15 +289,11 @@ sns.scatterplot(
 )
 
 plt.title("Attendance vs Average Marks")
-plt.xlabel("Attendance")
-plt.ylabel("Average Marks")
 
 plt.show()
 
 
-# --------------------------------
 # Age vs Average Marks
-# --------------------------------
 
 plt.figure(figsize=(7, 5))
 
@@ -435,16 +304,13 @@ sns.scatterplot(
 )
 
 plt.title("Age vs Average Marks")
-plt.xlabel("Age")
-plt.ylabel("Average Marks")
 
 plt.show()
 
 
 # ============================================================
-# 14. BIVARIATE CATEGORICAL ANALYSIS
+# 11. CATEGORICAL BIVARIATE ANALYSIS
 # ============================================================
-
 
 # Grade vs Average Marks
 
@@ -477,39 +343,12 @@ plt.show()
 
 
 # ============================================================
-# 15. DEPARTMENT-STYLE COMPARISON
-# ============================================================
-# Grade frequency
-
-grade_counts = df["Grade"].value_counts()
-
-print("\nGrade Distribution:")
-print(grade_counts)
-
-
-plt.figure(figsize=(7, 5))
-
-sns.countplot(
-    data=df,
-    x="Grade",
-    order=["A", "B", "C"]
-)
-
-plt.title("Grade Distribution")
-plt.xlabel("Grade")
-plt.ylabel("Number of Students")
-
-plt.show()
-
-
-# ============================================================
-# 16. CORRELATION ANALYSIS
+# 12. CORRELATION ANALYSIS
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("CORRELATION ANALYSIS")
-print("=" * 60)
-
+print("=" * 70)
 
 correlation_cols = [
     "Age",
@@ -527,7 +366,7 @@ print(correlation)
 
 
 # ============================================================
-# 17. CORRELATION HEATMAP
+# 13. CORRELATION HEATMAP
 # ============================================================
 
 plt.figure(figsize=(10, 7))
@@ -545,110 +384,77 @@ plt.show()
 
 
 # ============================================================
-# 18. FIND STRONGEST CORRELATION
+# 14. STRONGEST CORRELATION
 # ============================================================
 
-corr_matrix = correlation.copy()
+temp_corr = correlation.copy()
 
-# Remove diagonal
-np.fill_diagonal(corr_matrix.values, np.nan)
+np.fill_diagonal(
+    temp_corr.values,
+    np.nan
+)
 
-# Find strongest correlation
 strongest_pair = (
-    corr_matrix
-    .abs()
+    temp_corr.abs()
     .stack()
     .idxmax()
 )
 
-strongest_value = corr_matrix.loc[strongest_pair]
+strongest_value = temp_corr.loc[
+    strongest_pair[0],
+    strongest_pair[1]
+]
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("STRONGEST CORRELATION")
-print("=" * 60)
+print("=" * 70)
 
 print("Variables:", strongest_pair)
 print("Correlation:", strongest_value)
 
 
 # ============================================================
-# 19. OUTLIER DETECTION USING IQR
+# 15. OUTLIER DETECTION
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("OUTLIER ANALYSIS")
-print("=" * 60)
-
+print("=" * 70)
 
 outlier_summary = {}
-
 
 for col in numeric_cols:
 
     Q1 = df[col].quantile(0.25)
-
     Q3 = df[col].quantile(0.75)
 
     IQR = Q3 - Q1
 
-    lower_limit = Q1 - 1.5 * IQR
-
-    upper_limit = Q3 + 1.5 * IQR
-
+    lower = Q1 - 1.5 * IQR
+    upper = Q3 + 1.5 * IQR
 
     outliers = df[
-        (df[col] < lower_limit) |
-        (df[col] > upper_limit)
+        (df[col] < lower) |
+        (df[col] > upper)
     ]
-
 
     outlier_summary[col] = len(outliers)
 
-
     print("\nColumn:", col)
-
     print("Q1:", Q1)
-
     print("Q3:", Q3)
-
     print("IQR:", IQR)
-
-    print("Lower Limit:", lower_limit)
-
-    print("Upper Limit:", upper_limit)
-
+    print("Lower Limit:", lower)
+    print("Upper Limit:", upper)
     print("Number of Outliers:", len(outliers))
 
-
     if len(outliers) > 0:
-
-        print("Outlier values:")
-
+        print("Outliers:")
         print(outliers[["Student_ID", col]])
 
 
 # ============================================================
-# 20. OUTLIER SUMMARY GRAPH
-# ============================================================
-
-plt.figure(figsize=(8, 5))
-
-sns.barplot(
-    x=list(outlier_summary.keys()),
-    y=list(outlier_summary.values())
-)
-
-plt.title("Number of Outliers by Variable")
-plt.xlabel("Variable")
-plt.ylabel("Number of Outliers")
-
-plt.xticks(rotation=45)
-
-plt.show()
-
-
-# ============================================================
-# 21. PAIRPLOT
+# 16. PAIRPLOT
 # ============================================================
 
 print("\nGenerating Pairplot...")
@@ -669,13 +475,12 @@ plt.show()
 
 
 # ============================================================
-# 22. TOP PERFORMING STUDENTS
+# 17. TOP PERFORMING STUDENTS
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("TOP PERFORMING STUDENTS")
-print("=" * 60)
-
+print("=" * 70)
 
 top_students = df.sort_values(
     "Average_Marks",
@@ -696,17 +501,15 @@ print(
 
 
 # ============================================================
-# 23. LOW PERFORMING STUDENTS
+# 18. LOW PERFORMING STUDENTS
 # ============================================================
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("LOW PERFORMING STUDENTS")
-print("=" * 60)
-
+print("=" * 70)
 
 low_students = df.sort_values(
-    "Average_Marks",
-    ascending=True
+    "Average_Marks"
 )
 
 print(
@@ -723,78 +526,346 @@ print(
 
 
 # ============================================================
-# 24. AVERAGE PERFORMANCE BY GENDER
+# 19. DETAILED INSIGHTS
 # ============================================================
 
-print("\n" + "=" * 60)
-print("AVERAGE PERFORMANCE BY GENDER")
-print("=" * 60)
+print("\n" + "=" * 70)
+print("DETAILED EDA INSIGHTS")
+print("=" * 70)
 
-gender_performance = df.groupby(
+
+# Dataset insight
+
+print("\n1. DATASET OVERVIEW")
+print("-------------------")
+
+print(
+    f"The dataset contains {df.shape[0]} students "
+    f"and {df.shape[1]} variables."
+)
+
+print(
+    "The dataset contains demographic information, "
+    "study habits, attendance and academic performance."
+)
+
+
+# Missing values
+
+print("\n2. MISSING VALUES")
+print("------------------")
+
+if df.isnull().sum().sum() == 0:
+
+    print(
+        "There are no missing values in the dataset."
+    )
+
+else:
+
+    print(
+        "Missing values are present and require treatment."
+    )
+
+
+# Duplicate
+
+print("\n3. DUPLICATES")
+print("-------------")
+
+if df.duplicated().sum() == 0:
+
+    print(
+        "No duplicate rows were found."
+    )
+
+else:
+
+    print(
+        f"{df.duplicated().sum()} duplicate rows were found."
+    )
+
+
+# Study hours
+
+print("\n4. STUDY HOURS")
+print("---------------")
+
+print(
+    f"Average study time: "
+    f"{df['Study_Hours'].mean():.2f} hours."
+)
+
+study_corr = df[
+    "Study_Hours"
+].corr(
+    df["Average_Marks"]
+)
+
+print(
+    f"Correlation between study hours and average marks: "
+    f"{study_corr:.2f}"
+)
+
+if study_corr > 0:
+
+    print(
+        "There is a positive relationship between study "
+        "hours and academic performance."
+    )
+
+
+# Attendance
+
+print("\n5. ATTENDANCE")
+print("-------------")
+
+print(
+    f"Average attendance: "
+    f"{df['Attendance'].mean():.2f}%."
+)
+
+attendance_corr = df[
+    "Attendance"
+].corr(
+    df["Average_Marks"]
+)
+
+print(
+    f"Correlation between attendance and average marks: "
+    f"{attendance_corr:.2f}"
+)
+
+if attendance_corr > 0:
+
+    print(
+        "Higher attendance is generally associated with "
+        "better academic performance."
+    )
+
+
+# Subject performance
+
+print("\n6. SUBJECT PERFORMANCE")
+print("----------------------")
+
+subject_means = df[
+    ["Maths", "Science", "English"]
+].mean()
+
+print(subject_means)
+
+best_subject = subject_means.idxmax()
+
+lowest_subject = subject_means.idxmin()
+
+print(
+    f"Highest average score: {best_subject}"
+)
+
+print(
+    f"Lowest average score: {lowest_subject}"
+)
+
+
+# Grade
+
+print("\n7. GRADE DISTRIBUTION")
+print("---------------------")
+
+grade_counts = df["Grade"].value_counts()
+
+print(grade_counts)
+
+print(
+    f"Most common grade: "
+    f"{grade_counts.idxmax()}"
+)
+
+
+# Top student
+
+print("\n8. TOP PERFORMING STUDENT")
+print("-------------------------")
+
+top_student = df.loc[
+    df["Average_Marks"].idxmax()
+]
+
+print(
+    "Student ID:",
+    top_student["Student_ID"]
+)
+
+print(
+    "Average Marks:",
+    round(top_student["Average_Marks"], 2)
+)
+
+print(
+    "Study Hours:",
+    top_student["Study_Hours"]
+)
+
+print(
+    "Attendance:",
+    top_student["Attendance"]
+)
+
+print(
+    "Grade:",
+    top_student["Grade"]
+)
+
+
+# Lowest student
+
+print("\n9. LOWEST PERFORMING STUDENT")
+print("----------------------------")
+
+lowest_student = df.loc[
+    df["Average_Marks"].idxmin()
+]
+
+print(
+    "Student ID:",
+    lowest_student["Student_ID"]
+)
+
+print(
+    "Average Marks:",
+    round(lowest_student["Average_Marks"], 2)
+)
+
+print(
+    "Study Hours:",
+    lowest_student["Study_Hours"]
+)
+
+print(
+    "Attendance:",
+    lowest_student["Attendance"]
+)
+
+print(
+    "Grade:",
+    lowest_student["Grade"]
+)
+
+
+# Gender
+
+print("\n10. GENDER-WISE PERFORMANCE")
+print("---------------------------")
+
+gender_avg = df.groupby(
     "Gender"
 )["Average_Marks"].mean()
 
-print(gender_performance)
+print(gender_avg)
+
+print(
+    "This comparison is descriptive only because "
+    "the dataset is small."
+)
+
+
+# Outliers
+
+print("\n11. OUTLIER INSIGHTS")
+print("--------------------")
+
+total_outliers = sum(
+    outlier_summary.values()
+)
+
+if total_outliers == 0:
+
+    print(
+        "No significant outliers were detected "
+        "using the IQR method."
+    )
+
+else:
+
+    print(
+        f"A total of {total_outliers} outlier observations "
+        "were detected across numerical variables."
+    )
+
+
+# Skewness
+
+print("\n12. SKEWNESS INSIGHTS")
+print("---------------------")
+
+for col in numeric_cols:
+
+    value = df[col].skew()
+
+    if value > 1:
+
+        result = "Highly right-skewed"
+
+    elif value > 0.5:
+
+        result = "Moderately right-skewed"
+
+    elif value < -1:
+
+        result = "Highly left-skewed"
+
+    elif value < -0.5:
+
+        result = "Moderately left-skewed"
+
+    else:
+
+        result = "Approximately symmetric"
+
+    print(
+        f"{col}: {value:.2f} → {result}"
+    )
 
 
 # ============================================================
-# 25. AVERAGE PERFORMANCE BY GRADE
+# 20. FINAL CONCLUSION
 # ============================================================
 
-print("\n" + "=" * 60)
-print("AVERAGE PERFORMANCE BY GRADE")
-print("=" * 60)
-
-grade_performance = df.groupby(
-    "Grade"
-)["Average_Marks"].mean()
-
-print(grade_performance)
-
-
-# ============================================================
-# 26. FINAL INSIGHTS
-# ============================================================
-
-print("\n" + "=" * 60)
-print("EDA FINAL SUMMARY")
-print("=" * 60)
+print("\n" + "=" * 70)
+print("FINAL CONCLUSION")
+print("=" * 70)
 
 print("""
-1. The dataset contains student demographic and academic information.
+The Exploratory Data Analysis was performed on the Student
+Performance dataset.
 
-2. Missing-value analysis was performed and the dataset contains
-   no missing values.
+The analysis included dataset understanding, missing-value
+checking, duplicate checking, univariate analysis, bivariate
+analysis, skewness analysis, correlation analysis, visualization
+and outlier detection.
 
-3. Duplicate-value analysis was performed.
+The analysis indicates that study hours and attendance have
+positive relationships with academic performance in this sample.
 
-4. Univariate analysis was performed using histograms,
-   frequency charts and boxplots.
+The subject scores also show relationships with one another,
+indicating that students who perform well in one subject often
+perform well in other subjects.
 
-5. Skewness analysis was performed on numerical variables.
+Histograms were used to understand distributions, boxplots were
+used to identify possible outliers, scatterplots were used to
+study relationships, and a correlation heatmap was used to
+visualize numerical relationships.
 
-6. Bivariate analysis was performed to study relationships
-   between study hours, attendance and academic marks.
+Overall, the EDA helps identify important patterns in student
+performance and provides a foundation for further statistical
+analysis or machine learning.
 
-7. Correlation analysis was performed using a correlation matrix
-   and heatmap.
-
-8. Outliers were detected using the IQR method.
-
-9. Pairplot was used to visualize relationships among numerical
-   variables.
-
-10. Study hours and attendance can be examined as important
-    factors associated with student performance.
-
-11. Maths, Science and English marks can be compared to identify
-    relationships among academic subjects.
-
-12. The EDA provides useful patterns that can be used for
-    further statistical analysis or machine learning.
+Since this is a small dataset, the findings should be considered
+descriptive rather than universally applicable.
 """)
 
 
-print("\n" + "=" * 60)
-print("EDA COMPLETED SUCCESSFULLY")
-print("=" * 60)
+print("\n" + "=" * 70)
+print("COMPLETE EDA FINISHED SUCCESSFULLY")
+print("=" * 70)
